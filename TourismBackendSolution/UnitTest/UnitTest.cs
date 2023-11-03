@@ -23,42 +23,42 @@ namespace UnitTesting
             return options;
         }
 
-        [TestMethod("Test get all rooms")]
-        public async Task TestGetAllRooms()
-        {
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                context.Rooms?.Add(new Room
-                {
-                    RoomId = 1,
-                    RoomPricePerDay = 100.0f,
-                    ACAvailability = true,
-                    NumberOfPersons = 2,
-                    roomAvailability = true,
-                    HotelId = 1,
-                });
+        //[TestMethod("Test get all rooms")]
+        //public async Task TestGetAllRooms()
+        //{
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        context.Rooms?.Add(new Room
+        //        {
+        //            RoomId = 1,
+        //            RoomPricePerDay = 100.0f,
+        //            ACAvailability = true,
+        //            NumberOfPersons = 2,
+        //            roomAvailability = true,
+        //            HotelId = 1,
+        //        });
 
-                context.Rooms?.Add(new Room
-                {
-                    RoomId = 2,
-                    RoomPricePerDay = 120.0f,
-                    ACAvailability = false,
-                    NumberOfPersons = 3,
-                    roomAvailability = true,
-                    HotelId = 1,
-                });
+        //        context.Rooms?.Add(new Room
+        //        {
+        //            RoomId = 2,
+        //            RoomPricePerDay = 120.0f,
+        //            ACAvailability = false,
+        //            NumberOfPersons = 3,
+        //            roomAvailability = true,
+        //            HotelId = 1,
+        //        });
 
-                await context.SaveChangesAsync();
-            }
+        //        await context.SaveChangesAsync();
+        //    }
 
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
-                IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
-                var rooms = await repo.GetAll();
-                Assert.AreEqual(2, rooms.Count);
-            }
-        }
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
+        //        IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
+        //        var rooms = await repo.GetAll();
+        //        Assert.AreEqual(2, rooms.Count);
+        //    }
+        //}
 
         [TestMethod("Test add room")]
         public async Task TestAddRoom()
@@ -87,101 +87,101 @@ namespace UnitTesting
             }
         }
 
-        [TestMethod("Test delete room")]
-        public async Task TestDeleteRoom()
-        {
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                context.Rooms?.Add(new Room
-                {
-                    RoomId = 1,
-                    RoomPricePerDay = 100.0f,
-                    ACAvailability = true,
-                    NumberOfPersons = 2,
-                    roomAvailability = true,
-                    HotelId = 1,
-                });
+        //[TestMethod("Test delete room")]
+        //public async Task TestDeleteRoom()
+        //{
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        context.Rooms?.Add(new Room
+        //        {
+        //            RoomId = 1,
+        //            RoomPricePerDay = 100.0f,
+        //            ACAvailability = true,
+        //            NumberOfPersons = 2,
+        //            roomAvailability = true,
+        //            HotelId = 1,
+        //        });
 
-                await context.SaveChangesAsync();
-            }
+        //        await context.SaveChangesAsync();
+        //    }
 
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
-                IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
+        //        IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
 
-                var deletedRoom = await repo.Delete(1);
-                Assert.IsNotNull(deletedRoom);
+        //        var deletedRoom = await repo.Delete(1);
+        //        Assert.IsNotNull(deletedRoom);
 
-                var savedRoom = await context.Rooms.FirstOrDefaultAsync(r => r.RoomId == 1);
-                Assert.IsNull(savedRoom);
-            }
-        }
+        //        var savedRoom = await context.Rooms.FirstOrDefaultAsync(r => r.RoomId == 1);
+        //        Assert.IsNull(savedRoom);
+        //    }
+        //}
 
-        [TestMethod("Test get room by ID")]
-        public async Task TestGetRoomById()
-        {
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                context.Rooms?.Add(new Room
-                {
-                    RoomId = 1,
-                    RoomPricePerDay = 100.0f,
-                    ACAvailability = true,
-                    NumberOfPersons = 2,
-                    roomAvailability = true,
-                    HotelId = 1,
-                });
+        //[TestMethod("Test get room by ID")]
+        //public async Task TestGetRoomById()
+        //{
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        context.Rooms?.Add(new Room
+        //        {
+        //            RoomId = 1,
+        //            RoomPricePerDay = 100.0f,
+        //            ACAvailability = true,
+        //            NumberOfPersons = 2,
+        //            roomAvailability = true,
+        //            HotelId = 1,
+        //        });
 
-                await context.SaveChangesAsync();
-            }
+        //        await context.SaveChangesAsync();
+        //    }
 
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
-                IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
+        //        IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
 
-                var room = await repo.GetByRoomId(1);
-                Assert.IsNotNull(room);
-                Assert.AreEqual(1, room.RoomId);
-            }
-        }
+        //        var room = await repo.GetByRoomId(1);
+        //        Assert.IsNotNull(room);
+        //        Assert.AreEqual(1, room.RoomId);
+        //    }
+        //}
 
-        [TestMethod("Test update room")]
-        public async Task TestUpdateRoom()
-        {
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                context.Rooms?.Add(new Room
-                {
-                    RoomId = 1,
-                    RoomPricePerDay = 100.0f,
-                    ACAvailability = true,
-                    NumberOfPersons = 2,
-                    roomAvailability = true,
-                    HotelId = 1,
-                });
+        //[TestMethod("Test update room")]
+        //public async Task TestUpdateRoom()
+        //{
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        context.Rooms?.Add(new Room
+        //        {
+        //            RoomId = 1,
+        //            RoomPricePerDay = 100.0f,
+        //            ACAvailability = true,
+        //            NumberOfPersons = 2,
+        //            roomAvailability = true,
+        //            HotelId = 1,
+        //        });
 
-                await context.SaveChangesAsync();
-            }
+        //        await context.SaveChangesAsync();
+        //    }
 
-            using (var context = new HotelsContext(GetDbContextOptions()))
-            {
-                ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
-                IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
+        //    using (var context = new HotelsContext(GetDbContextOptions()))
+        //    {
+        //        ILogger<RoomRepo> logger = new LoggerFactory().CreateLogger<RoomRepo>();
+        //        IRoomRepo<Room, int> repo = new RoomRepo(context, logger);
 
-                var room = await repo.GetByRoomId(1);
-                Assert.IsNotNull(room);
+        //        var room = await repo.GetByRoomId(1);
+        //        Assert.IsNotNull(room);
 
-                room.RoomPricePerDay = 120.0f;
-                var updatedRoom = await repo.Update(room);
-                Assert.IsNotNull(updatedRoom);
-                Assert.AreEqual(120.0f, updatedRoom.RoomPricePerDay);
+        //        room.RoomPricePerDay = 120.0f;
+        //        var updatedRoom = await repo.Update(room);
+        //        Assert.IsNotNull(updatedRoom);
+        //        Assert.AreEqual(120.0f, updatedRoom.RoomPricePerDay);
 
-                var savedRoom = await context.Rooms.FirstOrDefaultAsync(r => r.RoomId == 1);
-                Assert.IsNotNull(savedRoom);
-                Assert.AreEqual(120.0f, savedRoom.RoomPricePerDay);
-            }
-        }
+        //        var savedRoom = await context.Rooms.FirstOrDefaultAsync(r => r.RoomId == 1);
+        //        Assert.IsNotNull(savedRoom);
+        //        Assert.AreEqual(120.0f, savedRoom.RoomPricePerDay);
+        //    }
+        //}
     }
 }

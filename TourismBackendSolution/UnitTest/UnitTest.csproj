@@ -18,10 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookingAPI\BookingAPI.csproj" />
-    <ProjectReference Include="..\FeedbackAPI\FeedbackAPI.csproj" />
     <ProjectReference Include="..\Hotels&amp;RoomsAPI\Hotels&amp;RoomsAPI.csproj" />
-    <ProjectReference Include="..\Login&amp;RegistrationAPI\Login&amp;RegistrationAPI.csproj" />
   </ItemGroup>
 
 </Project>

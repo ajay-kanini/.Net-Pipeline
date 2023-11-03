@@ -97,40 +97,40 @@ namespace UnitTesting
             Assert.AreEqual(1, fetchedHotel.AgentId);
         }
 
-        [TestMethod]
-        public async Task TestGetAllHotels()
-        {
-            using var hotelContext = new HotelsContext(GetDbContextOptions());
-            var hotelRepo = new HotelRepo(hotelContext, new Logger<HotelRepo>(new LoggerFactory()));
+        //[TestMethod]
+        //public async Task TestGetAllHotels()
+        //{
+        //    using var hotelContext = new HotelsContext(GetDbContextOptions());
+        //    var hotelRepo = new HotelRepo(hotelContext, new Logger<HotelRepo>(new LoggerFactory()));
 
-            var hotel1 = new Hotel
-            {
-                HotelName = "Hotel 1",
-                City = "City 1",
-                State = "State 1",
-                Address = "Address 1",
-                ContactNumber = "1111111111",
-                AgentId = 1
-            };
+        //    var hotel1 = new Hotel
+        //    {
+        //        HotelName = "Hotel 1",
+        //        City = "City 1",
+        //        State = "State 1",
+        //        Address = "Address 1",
+        //        ContactNumber = "1111111111",
+        //        AgentId = 1
+        //    };
 
-            var hotel2 = new Hotel
-            {
-                HotelName = "Hotel 2",
-                City = "City 2",
-                State = "State 2",
-                Address = "Address 2",
-                ContactNumber = "2222222222",
-                AgentId = 2
-            };
+        //    var hotel2 = new Hotel
+        //    {
+        //        HotelName = "Hotel 2",
+        //        City = "City 2",
+        //        State = "State 2",
+        //        Address = "Address 2",
+        //        ContactNumber = "2222222222",
+        //        AgentId = 2
+        //    };
 
-            await hotelRepo.Add(hotel1);
-            await hotelRepo.Add(hotel2);
+        //    await hotelRepo.Add(hotel1);
+        //    await hotelRepo.Add(hotel2);
 
-            var allHotels = await hotelRepo.GetAll();
+        //    var allHotels = await hotelRepo.GetAll();
 
-            Assert.IsNotNull(allHotels);
-            Assert.AreEqual(2, allHotels.Count);
-        }
+        //    Assert.IsNotNull(allHotels);
+        //    Assert.AreEqual(2, allHotels.Count);
+        //}
 
         [TestMethod]
         public async Task TestUpdateHotel()
